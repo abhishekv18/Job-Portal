@@ -5,7 +5,7 @@ import { Avatar, AvatarImage } from './ui/avatar'
 import { Badge } from './ui/badge'
 import { useNavigate } from 'react-router-dom'
 
-const Job = ({job}) => {
+const Job = ({job,handleSave}) => {
     const navigate=useNavigate();
    // const jobId="sfdg";
    const daysAgoFunction = (mongodbTime) => {
@@ -44,7 +44,7 @@ const Job = ({job}) => {
      </div>
      <div className='flex items-center gap-4 mt-4'>
                 <Button onClick={()=> navigate(`/description/${job?._id}`)} variant="outline"  >Details</Button>
-                <Button className="bg-[#7209b7]">Save For Later</Button>
+                <Button onClick={()=>handleSave(job?._id)}  className="bg-[#7209b7]"   >Save For Later</Button>
             </div>
     </div>
   )

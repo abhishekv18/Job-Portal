@@ -49,7 +49,7 @@ const Signup = () => {
             const res = await axios.post(`${USER_API_END_POINT}/register`, input, {
               //  headers: { 'Content-Type': "multipart/form-data" },
               headers: { 'Content-Type': "application/json" },
-                withCredentials: true,
+                withCredentials: true, 
             });
             if (res.data.success) {
                 navigate("/login");

@@ -3,10 +3,18 @@ import Navbar from './shared/Navbar'
 import FilterCard from './FilterCard'
 import Job from './Job';
 import Footer from './shared/Footer';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
+import { addToCart, fetchCartItems } from '@/redux/saveSlice';
+import { toast } from 'sonner';
+
+
+//import { addToCart, setLoading } from '@/redux/saveSlice';
 //const jobsArray=[1,2,3,4,5,6,7,8];
 const Jobs = () => {
+
+  const{saveItems}=useSelector(store=>store.saveLater);
+  const dispatch=useDispatch();
   const{allJobs,searchedQuery}=useSelector(store=>store.job);
   const [filterJobs,setFilterJobs]=useState(allJobs);
   useEffect(()=>{
@@ -21,6 +29,22 @@ const Jobs = () => {
       setFilterJobs(allJobs)
   }
 }, [allJobs, searchedQuery]);
+
+
+
+function handleSave(getId){
+   console.log(getId);
+   dispatch(addToCart({jobId:getId,quantity:1})).then(data=>{
+    if(data?.payload?.success){
+     dispatch(fetchCartItems());
+     toast.success("Job saved successfully")
+    }
+   })
+}
+
+console.log(saveItems);
+
+
   return (
     <div>
       <Navbar/>
@@ -40,7 +64,7 @@ const Jobs = () => {
     exit={{ opacity: 0, x: -100 }}
     transition={{ duration: 0.3 }}
     
-    key={job?._id} ><Job  job={job}/></motion.div>))
+    key={job?._id} ><Job handleSave={handleSave}  job={job}/></motion.div>))
           }
           </div>
         

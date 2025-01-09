@@ -1,20 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 import { Button } from '../ui/button'
 import { Avatar, AvatarImage } from '../ui/avatar'
-import { LogOut, User2 } from 'lucide-react'
+import { BookMarkedIcon, LogOut, ShoppingCart, User2 } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { USER_API_END_POINT } from '@/utils/constant'
 import { setUser } from '@/redux/authSlice'
 import { toast } from 'sonner'
+import { Sheet } from '../ui/sheet'
+import UserCartWrapper from '../SaveItems'
+import { fetchCartItems } from '@/redux/saveSlice'
 
 
 const Navbar = ()=> {
   const {user}=useSelector(store=>store.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [openCartSheet, setOpenCartSheet] = useState(false);
+  const { saveItems } = useSelector((state) => state.saveLater);
   const logoutHandler = async () => {
     try {
         const res = await axios.get(`${USER_API_END_POINT}/logout`, { withCredentials: true });
@@ -28,7 +33,9 @@ const Navbar = ()=> {
         toast.error(error.response.data.message);
     }
 }
- 
+ useEffect(()=>{
+   dispatch(fetchCartItems());
+ },[dispatch])
   return (
     <div className='bg-white'>
        <div className='flex items-center justify-between mx-auto max-w-6xl h-16'>
@@ -39,9 +46,9 @@ const Navbar = ()=> {
        
        
         </div>      
-         <div className='flex items-center gap-12'>
+         <div className='flex items-center gap-11'>
           
-            <ul className='flex font-medium gap-5 items-center'>  
+            <ul className='flex font-medium gap-4 items-center'>  
             {
             user && user.role=='recruiter'?(
               <>
@@ -54,6 +61,21 @@ const Navbar = ()=> {
           }
               
             </ul>
+            
+         <div className='flex lg:items-center lg:flex-row flex-col'>
+         <Sheet open={openCartSheet} onOpenChange={setOpenCartSheet}>
+    <Button onClick={()=>setOpenCartSheet(true)} variant='outline' size='icon' className='relative' >
+    <BookMarkedIcon className="w-6 h-6"/>
+    <span className="absolute top-[-5px] right-[2px] text-sm font-bold">{saveItems?.items?.length || 0}</span>
+    <span className="sr-only">User Cart</span>
+    </Button>
+    <UserCartWrapper setOpenCartSheet={setOpenCartSheet} saveItems={ saveItems && saveItems.items && saveItems.items.length > 0
+              ? saveItems.items
+              : [] }></UserCartWrapper>
+    
+    </Sheet>
+         </div>
+         
             {// if false to ye vrna vo
               !user?(
                 <div className='flex items-center gap-2'>
@@ -63,6 +85,7 @@ const Navbar = ()=> {
                  
                 </div>
               ):(
+               
                 <Popover>
                 <PopoverTrigger asChild>
                 <Avatar className="cursor-pointer">
@@ -111,7 +134,7 @@ const Navbar = ()=> {
            
          </div>
        </div>
-    </div>
+       </div>
   )
 }
 
