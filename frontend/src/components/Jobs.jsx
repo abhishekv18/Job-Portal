@@ -33,11 +33,13 @@ const Jobs = () => {
 
 
 function handleSave(getId){
+ 
    console.log(getId);
    dispatch(addToCart({jobId:getId,quantity:1})).then(data=>{
+   
     if(data?.payload?.success){
      dispatch(fetchCartItems());
-     toast.success("Job saved successfully")
+     toast.success(data?.payload?.message)
     }
    })
 }

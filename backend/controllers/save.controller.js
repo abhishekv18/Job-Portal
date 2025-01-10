@@ -72,6 +72,9 @@ export  const fetchSaveItems= async (req, res) => {
         });
       }
   
+  
+  
+   
       const validItems = saveItem.items.filter(
         (productItem) => productItem.jobId
       );
@@ -80,9 +83,6 @@ export  const fetchSaveItems= async (req, res) => {
         saveItem.items = validItems;
         await saveItem.save();
       }
-  
-  
-   
     
 
 

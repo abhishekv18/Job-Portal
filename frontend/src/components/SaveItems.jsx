@@ -4,11 +4,11 @@ import { SheetContent, SheetHeader, SheetTitle } from "./ui/sheet";
 function UserCartWrapper({setOpenCartSheet,saveItems}) {
     return ( 
 <SheetContent>
-<SheetHeader>
+<SheetHeader className='flex flex-row items-center gap-2'>
 
-        <SheetTitle className='font-extrabold ml-1'>Saved Jobs</SheetTitle>
-        
-    </SheetHeader>
+        <SheetTitle className='font-extrabold ml-1 mt-2'>Saved Jobs</SheetTitle>
+        <SheetTitle className=''>({saveItems.length})</SheetTitle>
+     </SheetHeader>
    
    
 
