@@ -14,14 +14,14 @@ const initialState={
 
 export const addToCart = createAsyncThunk(
   "/save/addToSave",
-  async ({  jobId, quantity }) => {
+  async ({  jobId,quantity }) => {
     const response = await axios.post(
       "http://localhost:8000/api/v1/save/add",
 
       {
-      
+     
         jobId,
-        quantity,
+        quantity 
       },
       {
         //  headers: { 'Content-Type': "multipart/form-data" },

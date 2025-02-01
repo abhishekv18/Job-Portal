@@ -1,7 +1,15 @@
+import { useEffect } from "react";
 import UserCartItemsContent from "./SaveItemContent";
 import { SheetContent, SheetHeader, SheetTitle } from "./ui/sheet";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCartItems } from "@/redux/saveSlice";
 
 function UserCartWrapper({setOpenCartSheet,saveItems}) {
+    //const{saveItems}=useSelector(store=>store.saveLater);
+   const dispatch=useDispatch();
+   // useEffect(()=>{
+//dispatch(fetchCartItems())
+  //  },[dispatch])
     return ( 
 <SheetContent>
 <SheetHeader className='flex flex-row items-center gap-2'>

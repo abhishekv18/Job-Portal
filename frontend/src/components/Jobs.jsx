@@ -39,6 +39,7 @@ function handleSave(getId){
    
     if(data?.payload?.success){
      dispatch(fetchCartItems());
+    
      toast.success(data?.payload?.message)
     }
    })

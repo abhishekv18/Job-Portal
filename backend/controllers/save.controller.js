@@ -27,11 +27,10 @@ export const addToSave = async (req, res) => {
       if (findCurrentProductIndex === -1) {
         saveItem.items.push({ jobId,quantity });
       } 
-      else {
-       
+      else { 
         saveItem.items[findCurrentProductIndex].quantity += quantity;
       }
-
+      
     
      
 

@@ -18,8 +18,8 @@ userId:{
         required: true
     },
     quantity:{
-        type:Number,
-        required:true,
+       type:Number,
+       required:true,
         min:1,
           },
 },
