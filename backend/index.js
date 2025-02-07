@@ -8,8 +8,17 @@ import companyRoute from "./routes/company.route.js"
 import jobRoute from "./routes/job.route.js"
 import applicationRoute from "./routes/application.route.js";
 import saveRoute from "./routes/save.route.js";
+import path from "path";
+
 dotenv.config({});
+
+connectDB();
+const PORT=process.env.PORT || 3000;
 const app=express();
+
+const _dirname=path.resolve();
+
+
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -28,8 +37,15 @@ app.use("/api/v1/job",jobRoute);
 app.use("/api/v1/application", applicationRoute);
 app.use("/api/v1/save", saveRoute);
 
-const PORT=process.env.PORT || 3000;
+
+app.use(express.static(path.join(_dirname,"/frontend/dist")))
+app.get('*',(_,res)=>{
+    res.sendFile(path.resolve(_dirname,"frontend","dist","index.html"))
+})
+
+
+
 app.listen(PORT,()=>{
-    connectDB();
+    
     console.log(`server is running at port ${PORT}`);
 })

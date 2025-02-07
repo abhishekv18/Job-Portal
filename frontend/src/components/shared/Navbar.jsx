@@ -33,9 +33,12 @@ const Navbar = ()=> {
         toast.error(error.response.data.message);
     }
 }
+
+  
  useEffect(()=>{
    dispatch(fetchCartItems());
- },[dispatch])
+ },[dispatch]);
+ 
   return (
     <div className='bg-white'>
        <div className='flex items-center justify-between mx-auto max-w-6xl h-16'>
