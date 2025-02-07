@@ -18,7 +18,7 @@ const ApplicantsTable = () => {
     // e.preventDefault();
 try {
   axios.defaults.withCredentials = true;
-  const res = await axios.post(`${APPLICATION_API_END_POINT}/status/${id}/update`,{status});
+  const res = await axios.post(`https://job-portal-kit7.onrender.com/api/v1/application/status/${id}/update`,{status});
 if(res.data.success){
   toast.success(res.data.message);
 }
