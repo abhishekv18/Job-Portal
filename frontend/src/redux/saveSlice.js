@@ -16,7 +16,7 @@ export const addToCart = createAsyncThunk(
   "/save/addToSave",
   async ({  jobId,quantity }) => {
     const response = await axios.post(
-      "http://localhost:8000/api/v1/save/add",
+      "https://job-portal-kit7.onrender.com/api/v1/save/add",
 
       {
      
@@ -41,7 +41,7 @@ export const fetchCartItems = createAsyncThunk(
 
 
     const result = await axios.get(
-  "http://localhost:8000/api/v1/save/get", {
+  "https://job-portal-kit7.onrender.com/api/v1/save/get", {
     //  headers: { 'Content-Type': "multipart/form-data" },
    // headers: { 'Content-Type': "application/json" },
       withCredentials: true, 
@@ -55,7 +55,7 @@ export const deleteSaveItem = createAsyncThunk(
   "/save/deleteSaveItem",
   async ({  jobId }) => {
     const response = await axios.delete(
-      `http://localhost:8000/api/v1/save/delete/${jobId}`,{
+      `https://job-portal-kit7.onrender.com/api/v1/save/delete/${jobId}`,{
         //  headers: { 'Content-Type': "multipart/form-data" },
        // headers: { 'Content-Type': "application/json" },
           withCredentials: true, 

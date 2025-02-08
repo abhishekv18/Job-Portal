@@ -60,12 +60,8 @@ const Navbar = ()=> {
               </>
             ):(<><li><Link to='/'>Home</Link></li>
               <li><Link to='/jobs'>Jobs</Link></li>
-              <li><Link to='/browse'>Browse</Link></li></>)
-          }
-              
-            </ul>
-            
-         <div className='flex lg:items-center lg:flex-row flex-col'>
+              <li><Link to='/browse'>Browse</Link></li>
+              <li> <div className='flex lg:items-center lg:flex-row flex-col'>
          <Sheet open={openCartSheet} onOpenChange={setOpenCartSheet}>
     <Button onClick={()=>setOpenCartSheet(true)} variant='outline' size='icon' className='relative' >
     <BookMarkedIcon className="w-6 h-6"/>
@@ -78,6 +74,13 @@ const Navbar = ()=> {
     
     </Sheet>
          </div>
+         </li>
+              </>)
+          }
+              
+            </ul>
+            
+        
          
             {// if false to ye vrna vo
               !user?(
